@@ -1,6 +1,5 @@
 package com.ple.investmentGame;
 
-import java.io.OptionalDataException;
 import java.util.Random;
 
 import static com.ple.investmentGame.WinningStatus.win;
@@ -37,6 +36,12 @@ public class Deck {
       Card cardBeingShuffled = cards[rndIndex];
       cards[rndIndex] = cards[i];
       cards[i] = cardBeingShuffled;
+    }
+  }
+
+  public void printWinningStatusOfEachCard() {
+    for(Card card : cards) {
+      System.out.println(card.status);
     }
   }
 
