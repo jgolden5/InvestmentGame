@@ -62,12 +62,16 @@ public class Deck {
   }
 
   public void drawCard() {
-    Card topCard = cards[0];
-    System.out.println(topCard.status);
-    removeTopCard();
+    if(cards.length > 0) {
+      Card topCard = cards[0];
+      System.out.println(topCard.status);
+      removeTopCard();
+    } else {
+      System.out.println("There are no cards left in the deck");
+    }
   }
 
-  public void removeTopCard() {
+  private void removeTopCard() {
     Card[] newCards = new Card[cards.length - 1];
     for(int i = 0; i < cards.length - 1; i++) {
       newCards[i] = cards[i + 1];
