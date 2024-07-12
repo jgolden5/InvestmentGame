@@ -14,19 +14,27 @@ public class UserUtil {
       System.out.println("Type a command:");
       String commandAsString = scanner.nextLine();
       Command command = getCommandFromString(commandAsString);
-      if(command != null) command.execute();
+      UserDestination userDestination = UserDestination.prompt;
+      if(command != null) {
+        userDestination = command.executeAndGetUserDestination();
+      }
+      if(userDestination == UserDestination.exit) {
+        keepGoing = false;
+      }
     }
   }
 
   private Command getCommandFromString(String commandAsString) {
+    Command command;
     switch(commandAsString) {
       case "exit", "q":
-        return new ExitCommand();
+        command = new ExitCommand();
         break;
       default:
         System.out.println("Command " + commandAsString + " not recognized.");
-        return null;
+        command = null;
     }
+    return command;
   }
 
 }
