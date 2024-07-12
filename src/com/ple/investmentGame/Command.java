@@ -1,4 +1,5 @@
 package com.ple.investmentGame;
 
-public class Command {
+public interface Command {
+  public void execute();
 }
