@@ -4,6 +4,7 @@ import static com.ple.investmentGame.WinningStatus.*;
 
 public class Main {
   public static void main(String[] args) {
+    UserUtil uu = UserUtil.make();
     Deck deck = Deck.generate(0, 0);
     deck.shuffle();
     deck.printWinningStatusOfEachCard();
