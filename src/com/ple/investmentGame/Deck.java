@@ -2,14 +2,27 @@ package com.ple.investmentGame;
 
 import java.util.Random;
 
-import static com.ple.investmentGame.WinningStatus.win;
+import static com.ple.investmentGame.WinningStatus.*;
 
 public class Deck {
   public Card[] cards;
-  public int numberOfWinsRemaining;
-  public Deck(Card[] cards) {
+  private int numberOfWinsRemaining;
+
+  private Deck(Card[] cards) {
     this.cards = cards;
     this.numberOfWinsRemaining = getNumberOfWinsRemaining();
+  }
+
+  public static Deck generate(int numberOfCards, int numberOfWins) {
+    Card[] generatedCards = new Card[numberOfCards];
+    for(int i = 0; i < numberOfCards; i++) {
+      if(i < numberOfWins) {
+        generatedCards[i] = new Card(win);
+      } else {
+        generatedCards[i] = new Card(loss);
+      }
+    }
+    return new Deck(generatedCards);
   }
 
   private int getNumberOfWinsRemaining() {
@@ -40,8 +53,10 @@ public class Deck {
   }
 
   public void printWinningStatusOfEachCard() {
+    int cardNumber = 1;
     for(Card card : cards) {
-      System.out.println(card.status);
+      System.out.println(cardNumber + ". " + card.status);
+      cardNumber++;
     }
   }
 
