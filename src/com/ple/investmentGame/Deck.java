@@ -35,13 +35,6 @@ public class Deck {
     return numberOfWinsRemaining;
   }
 
-  public String getOddsOfWinAsPercentage() {
-    double odds = (double)numberOfWinsRemaining / (double)cards.length;
-    double oddsAsPercentage = (odds * 100);
-    double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);
-    return oddsAsPercentageToTheHundredth + "%";
-  }
-
   public void shuffle() {
     Random rnd = new Random();
     for (int i = cards.length - 1; i > 0; i--) {
@@ -58,6 +51,28 @@ public class Deck {
       System.out.println(cardNumber + ". " + card.status);
       cardNumber++;
     }
+    System.out.println();
+  }
+
+  public String getOddsOfWinAsPercentage() {
+    double odds = (double)numberOfWinsRemaining / (double)cards.length;
+    double oddsAsPercentage = (odds * 100);
+    double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);
+    return oddsAsPercentageToTheHundredth + "%";
+  }
+
+  public void drawCard() {
+    Card topCard = cards[0];
+    System.out.println(topCard.status);
+    removeTopCard();
+  }
+
+  public void removeTopCard() {
+    Card[] newCards = new Card[cards.length - 1];
+    for(int i = 0; i < cards.length - 1; i++) {
+      newCards[i] = cards[i + 1];
+    }
+    cards = newCards;
   }
 
 }

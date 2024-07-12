@@ -7,7 +7,8 @@ public class Main {
     Deck deck = Deck.generate(30, 20);
     deck.shuffle();
     deck.printWinningStatusOfEachCard();
-    System.out.println();
+    deck.drawCard();
+    deck.printWinningStatusOfEachCard();
     System.out.println(deck.getOddsOfWinAsPercentage());
   }
 }
