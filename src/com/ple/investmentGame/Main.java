@@ -11,6 +11,7 @@ public class Main {
     cards[3] = new Card(loss);
     cards[4] = new Card(loss);
     Deck deck = new Deck(cards);
+    deck.shuffle();
     System.out.println(deck.getOddsOfWinAsPercentage());
   }
 }

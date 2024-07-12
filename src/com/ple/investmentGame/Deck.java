@@ -1,5 +1,8 @@
 package com.ple.investmentGame;
 
+import java.io.OptionalDataException;
+import java.util.Random;
+
 import static com.ple.investmentGame.WinningStatus.win;
 
 public class Deck {
@@ -24,8 +27,17 @@ public class Deck {
     double odds = (double)numberOfWinsRemaining / (double)cards.length;
     double oddsAsPercentage = (odds * 100);
     double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);
-    String oddsAsPercentageString = oddsAsPercentageToTheHundredth + "%";
-    return oddsAsPercentageString;
+    return oddsAsPercentageToTheHundredth + "%";
+  }
+
+  public void shuffle() {
+    Random rnd = new Random();
+    for (int i = cards.length - 1; i > 0; i--) {
+      int rndIndex = rnd.nextInt(i + 1);
+      Card cardBeingShuffled = cards[rndIndex];
+      cards[rndIndex] = cards[i];
+      cards[i] = cardBeingShuffled;
+    }
   }
 
 }
