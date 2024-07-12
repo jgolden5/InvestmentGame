@@ -17,6 +17,7 @@ public class UserUtil {
 
   private void initializeKeymap() {
     keymap.put("exit", new ExitCommand());
+    keymap.put("generate", new GenerateCommand());
 
   }
 
@@ -27,7 +28,7 @@ public class UserUtil {
       System.out.println("Type a command:");
       String commandAsString = scanner.nextLine();
       Command command = keymap.get(commandAsString);
-      UserDestination userDestination = UserDestination.prompt;
+      UserDestination userDestination = UserDestination.mainPrompt;
       if(command != null) {
         userDestination = command.executeAndGetUserDestination();
       } else {
