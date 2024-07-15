@@ -16,13 +16,16 @@ public class UserUtil {
   }
 
   private void initializeKeymap() {
-    keymap.put("exit", new ExitCommand());
-    keymap.put("generateDeck", new GenerateDeckCommand());
-    keymap.put("play", new PlayCommand());
+    keymap.put("quit", new QuitCommand());
+
+    keymap.put("changeDeck", new ChangeDeckCommand());
+    keymap.put("deck", new ChangeDeckCommand());
 
   }
 
   public void startPrompt() {
+    new ChangeDeckCommand().execute();
+    System.out.println("beginning game...");
     boolean keepGoing = true;
     while(keepGoing) {
       Scanner scanner = new Scanner(System.in);

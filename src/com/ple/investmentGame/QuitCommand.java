@@ -1,9 +1,9 @@
 package com.ple.investmentGame;
 
-public class ExitCommand extends Command {
+public class QuitCommand extends Command {
   @Override
   public void execute() {
-    System.out.println("Successfully exited user prompt");
+    System.out.println("Are you sure you want to quit?");
   }
 
   @Override
