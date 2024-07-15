@@ -6,7 +6,7 @@ import static com.ple.investmentGame.WinningStatus.*;
 
 public class Deck {
   public Card[] cards;
-  private int numberOfWinsRemaining;
+  public int numberOfWinsRemaining;
 
   private Deck(Card[] cards) {
     this.cards = cards;

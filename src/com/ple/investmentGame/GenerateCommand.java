@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class GenerateCommand extends Command {
   @Override
   public void execute() {
-    System.out.println("Enter total number of cards followed by the number of wins, separated by a space:");
+    System.out.println("Enter total number of cards followed by the number of wins (separate with a space)");
     Scanner scanner = new Scanner(System.in);
     String deckInputsAsStrings = scanner.nextLine();
     String[] deckInputsAsArrayOfStrings = deckInputsAsStrings.split(" ");
@@ -15,12 +15,10 @@ public class GenerateCommand extends Command {
     deck.shuffle();
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     igms.putDeck(deck);
-    //for testing purposes...
-    deck.printWinningStatusOfEachCard();
   }
 
   @Override
   public UserDestination getUserDestination() {
-    return UserDestination.mainPrompt;
+    return UserDestination.nowhere;
   }
 }
