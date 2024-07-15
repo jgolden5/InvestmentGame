@@ -56,6 +56,7 @@ public class Deck {
   }
 
   public String getOddsOfWinAsPercentage() {
+    int numberOfWins = calcNumberOfWins();
     double odds = (double) numberOfWins / (double)cards.length;
     double oddsAsPercentage = (odds * 100);
     double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);

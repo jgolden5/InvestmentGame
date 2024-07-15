@@ -8,6 +8,11 @@ public class PromptService {
     return new PromptService();
   }
 
+  public void play() {
+    start();
+    invest();
+  }
+
   public void start() {
     System.out.println("Separate the following with spaces to generate deck:");
     System.out.println("Total cards; Winning cards; Growth factor");
@@ -78,11 +83,19 @@ public class PromptService {
             System.out.println("There were " + cardsRemaining + ", with " + winsRemaining + " wins remaining.");
             keepGoing = false;
           }
+          igsm.putTokens(tokens);
         }
       } else {
         System.out.println("Your total money is " + tokens + ". Congratulations!");
         keepGoing = false;
       }
+      igsm.putDeck(deck);
+    }
+    System.out.println("would you like to play again?");
+    Scanner scanner = new Scanner(System.in);
+    String userWantsToPlayAgain = scanner.nextLine();
+    if(userWantsToPlayAgain.toLowerCase().equals("yes")) {
+      play();
     }
     //Your total money is 5 tokens. There are 2 wins left out of 4 total cards. Your chances of winning are 50%.
     //How much do you want to invest?
