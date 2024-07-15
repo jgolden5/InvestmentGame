@@ -10,12 +10,12 @@ public class PromptService {
 
   public void start() {
     System.out.println("Separate the following with spaces to generate deck:");
-    System.out.println("Winning cards; Total cards; Growth factor");
+    System.out.println("Total cards; Winning cards; Growth factor");
     Scanner scanner = new Scanner(System.in);
     String deckInputsAsStrings = scanner.nextLine();
     String[] deckInputsAsArrayOfStrings = deckInputsAsStrings.split(" ");
-    int numberOfWins = Integer.parseInt(deckInputsAsArrayOfStrings[0]);
-    int numberOfCards = Integer.parseInt(deckInputsAsArrayOfStrings[1]);
+    int numberOfCards = Integer.parseInt(deckInputsAsArrayOfStrings[0]);
+    int numberOfWins = Integer.parseInt(deckInputsAsArrayOfStrings[1]);
     Deck deck = Deck.generate(numberOfCards, numberOfWins);
     deck.shuffle();
     int growthFactor = Integer.parseInt(deckInputsAsArrayOfStrings[2]);
@@ -47,6 +47,13 @@ public class PromptService {
     while(keepGoing) {
       int cardsRemaining = deck.length();
       int winsRemaining = deck.calcNumberOfWins();
+      if(cardsRemaining == winsRemaining) {
+        System.out.println("Chances of winning are 100%, so the game is over.");
+        break;
+      } else if(winsRemaining == 0) {
+        System.out.println("Chances of winning are 0%, so the game is over.");
+        break;
+      }
       System.out.println("You currently have " + tokens + " tokens. There are " + deck.calcNumberOfWins() +
         " wins left out of the " + cardsRemaining + " total cards. Your chances of winning are " +
         deck.getOddsOfWinAsPercentage() + ".");
@@ -69,6 +76,7 @@ public class PromptService {
           if(tokens <= 0) {
             System.out.println("Token total has reached 0. You have gone bankrupt...");
             System.out.println("There were " + cardsRemaining + ", with " + winsRemaining + " wins remaining.");
+            keepGoing = false;
           }
         }
       } else {
