@@ -60,7 +60,7 @@ public class PromptService {
         if(card.status == WinningStatus.win) {
           int growthFactor = deck.getGrowthFactor();
           System.out.println("Your investment of " + investment + " has multiplied by " + growthFactor);
-          tokens *= growthFactor;
+          tokens += investment * growthFactor - investment;
           igsm.putTokens(tokens);
         } else {
           tokens -= investment;
