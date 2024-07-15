@@ -36,7 +36,7 @@ public class PromptService {
     int growthFactor = deck.getGrowthFactor();
     int tokens = igms.getTokens();
     System.out.println("Your deck has " + numberOfWins + " wins and " + numberOfCards + " total cards, " +
-      "with a growth factor of " + growthFactor + ". You have " + tokens + " tokens.");
+      "with a growth factor of " + growthFactor + ". You have " + tokens + " tokens to start with.");
   }
 
   public void invest() {
@@ -45,7 +45,7 @@ public class PromptService {
     int tokens = igsm.getTokens();
     boolean keepGoing = deck.length() > 0;
     while(keepGoing) {
-      System.out.println("Your total money is " + tokens + ". There are " + deck.getNumberOfWins() +
+      System.out.println("You currently have " + tokens + " tokens. There are " + deck.getNumberOfWins() +
         " wins left out of the " + deck.length() + " total cards. Your chances of winning are " +
         deck.getOddsOfWinAsPercentage() + ".");
       System.out.println("How much do you want to invest?");
