@@ -31,7 +31,7 @@ public class PromptService {
   private void confirmationMessage() {
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     Deck deck = igms.getDeck();
-    int numberOfWins = deck.getNumberOfWins();
+    int numberOfWins = deck.calcNumberOfWins();
     int numberOfCards = deck.length();
     int growthFactor = deck.getGrowthFactor();
     int tokens = igms.getTokens();
@@ -45,8 +45,10 @@ public class PromptService {
     int tokens = igsm.getTokens();
     boolean keepGoing = deck.length() > 0;
     while(keepGoing) {
-      System.out.println("You currently have " + tokens + " tokens. There are " + deck.getNumberOfWins() +
-        " wins left out of the " + deck.length() + " total cards. Your chances of winning are " +
+      int cardsRemaining = deck.length();
+      int winsRemaining = deck.calcNumberOfWins();
+      System.out.println("You currently have " + tokens + " tokens. There are " + deck.calcNumberOfWins() +
+        " wins left out of the " + cardsRemaining + " total cards. Your chances of winning are " +
         deck.getOddsOfWinAsPercentage() + ".");
       System.out.println("How much do you want to invest?");
       Scanner scanner = new Scanner(System.in);
@@ -55,7 +57,7 @@ public class PromptService {
         System.out.println("Your investment is greater than your number of tokens. Investing all " + tokens + " tokens.");
         investment = tokens;
       }
-      if(deck.length() > 0) {
+      if(cardsRemaining > 0) {
         Card card = deck.drawCard();
         if(card.status == WinningStatus.win) {
           int growthFactor = deck.getGrowthFactor();
@@ -64,6 +66,10 @@ public class PromptService {
           igsm.putTokens(tokens);
         } else {
           tokens -= investment;
+          if(tokens <= 0) {
+            System.out.println("Token total has reached 0. You have gone bankrupt...");
+            System.out.println("There were " + cardsRemaining + ", with " + winsRemaining + " wins remaining.");
+          }
         }
       } else {
         System.out.println("Your total money is " + tokens + ". Congratulations!");

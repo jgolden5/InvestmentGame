@@ -11,7 +11,7 @@ public class Deck {
 
   private Deck(Card[] cards) {
     this.cards = cards;
-    this.numberOfWins = initializeNumberOfWins();
+    this.numberOfWins = calcNumberOfWins();
   }
 
   public static Deck generate(int numberOfCards, int numberOfWins) {
@@ -26,7 +26,7 @@ public class Deck {
     return new Deck(generatedCards);
   }
 
-  private int initializeNumberOfWins() {
+  public int calcNumberOfWins() {
     int numberOfWinsRemaining = 0;
     for(Card card : cards) {
       if(card.status == win) {
@@ -92,10 +92,6 @@ public class Deck {
 
   public int length() {
     return cards.length;
-  }
-
-  public int getNumberOfWins() {
-    return numberOfWins;
   }
 
 }
