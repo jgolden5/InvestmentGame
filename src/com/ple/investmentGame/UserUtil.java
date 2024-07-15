@@ -22,27 +22,32 @@ public class UserUtil {
 
   }
 
-  public void startPrompt() {
-    boolean keepGoing = true;
-    while(keepGoing) {
-      Scanner scanner = new Scanner(System.in);
-      System.out.println("Type a command:");
-      String commandAsString = scanner.nextLine();
-      Command command = keymap.get(commandAsString);
-      UserDestination userDestination = UserDestination.start;
-      if(command != null) {
-        userDestination = command.executeAndGetUserDestination();
-      } else {
-        System.out.println("Command not recognized");
-      }
-      if(userDestination == UserDestination.exit) {
-        keepGoing = false;
-      } else if(userDestination == UserDestination.play) {
-        playPrompt();
-        keepGoing = false;
-      }
-    }
+  public void startPrompt(String promptName) {
+    Prompt prompt = getPrompt(promptName);
+    prompt.start();
   }
+
+//  public void startPrompt() {
+//    boolean keepGoing = true;
+//    while(keepGoing) {
+//      Scanner scanner = new Scanner(System.in);
+//      System.out.println("Type a command:");
+//      String commandAsString = scanner.nextLine();
+//      Command command = keymap.get(commandAsString);
+//      UserDestination userDestination = UserDestination.start;
+//      if(command != null) {
+//        userDestination = command.executeAndGetUserDestination();
+//      } else {
+//        System.out.println("Command not recognized");
+//      }
+//      if(userDestination == UserDestination.exit) {
+//        keepGoing = false;
+//      } else if(userDestination == UserDestination.play) {
+//        playPrompt();
+//        keepGoing = false;
+//      }
+//    }
+//  }
 
   private void playPrompt() {
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
