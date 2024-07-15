@@ -62,14 +62,16 @@ public class Deck {
     return oddsAsPercentageToTheHundredth + "%";
   }
 
-  public void drawCard() {
+  public Card drawCard() {
+    Card topCard = null;
     if(cards.length > 0) {
-      Card topCard = cards[0];
+      topCard = cards[0];
       System.out.println(topCard.status);
       removeTopCard();
     } else {
       System.out.println("There are no cards left in the deck");
     }
+    return topCard;
   }
 
   private void removeTopCard() {
@@ -88,4 +90,7 @@ public class Deck {
     return growthFactor;
   }
 
+  public int length() {
+    return cards.length;
+  }
 }
