@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class UserService {
 
   private final HashMap<String, Command> keymap = new HashMap<>();
+  private final HashMap<String, Prompt> promptMap = new HashMap<>();
+
 
   public static UserService make() {
     return new UserService();
@@ -25,6 +27,10 @@ public class UserService {
   public void startPrompt(String promptName) {
     Prompt prompt = getPrompt(promptName);
     prompt.start();
+  }
+
+  private Prompt getPrompt(String promptName) {
+    return promptMap.get(promptName);
   }
 
 //  public void startPrompt() {
