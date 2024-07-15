@@ -32,7 +32,11 @@ public class PromptService {
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     Deck deck = igms.getDeck();
     int numberOfWins = deck.getNumberOfWins();
-    System.out.println("Your deck has ");
+    int numberOfCards = deck.length();
+    int growthFactor = deck.getGrowthFactor();
+    int tokens = igms.getTokens();
+    System.out.println("Your deck has " + numberOfWins + " wins and " + numberOfCards + " total cards, " +
+      "with a growth factor of " + growthFactor + ". You have " + tokens + " tokens.");
   }
 
   public void invest() {
