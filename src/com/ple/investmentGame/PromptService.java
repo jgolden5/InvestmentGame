@@ -52,11 +52,10 @@ public class PromptService {
     while(keepGoing) {
       int cardsRemaining = deck.length();
       int winsRemaining = deck.calcNumberOfWins();
-      if(cardsRemaining == winsRemaining) {
-        System.out.println("Chances of winning are 100%, so the game is over.");
-        break;
-      } else if(winsRemaining == 0) {
-        System.out.println("Chances of winning are 0%, so the game is over.");
+      if(cardsRemaining == winsRemaining || winsRemaining == 0) {
+        int chancesOfWinning = winsRemaining == 0 ? 0 : 100;
+        System.out.println("Chances of winning are " + chancesOfWinning + "%, so the game is over.");
+        System.out.println("Your total money is " + tokens + ". Congratulations!");
         break;
       }
       System.out.println("You currently have " + tokens + " tokens. There are " + deck.calcNumberOfWins() +
