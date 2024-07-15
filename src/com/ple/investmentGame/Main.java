@@ -4,7 +4,7 @@ public class Main {
   public static void main(String[] args) {
     PromptService promptService = PromptService.make();
     System.out.println("Welcome to the Investment Game!\n");
-    promptService.generateDeck();
+    promptService.start();
     //start prompt asks how many cards are wanted in deck, and calls deck.generate based on user inputs
     promptService.invest();
     //"Your total money is " + tokens + " tokens. There are " + numberOfWinsLeft + " wins left out of " +

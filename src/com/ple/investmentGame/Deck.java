@@ -6,12 +6,12 @@ import static com.ple.investmentGame.WinningStatus.*;
 
 public class Deck {
   public Card[] cards;
-  public int numberOfWinsRemaining;
+  public int numberOfWins;
   private int growthFactor;
 
   private Deck(Card[] cards) {
     this.cards = cards;
-    this.numberOfWinsRemaining = getNumberOfWinsRemaining();
+    this.numberOfWins = initializeNumberOfWins();
   }
 
   public static Deck generate(int numberOfCards, int numberOfWins) {
@@ -26,7 +26,7 @@ public class Deck {
     return new Deck(generatedCards);
   }
 
-  private int getNumberOfWinsRemaining() {
+  private int initializeNumberOfWins() {
     int numberOfWinsRemaining = 0;
     for(Card card : cards) {
       if(card.status == win) {
@@ -56,7 +56,7 @@ public class Deck {
   }
 
   public String getOddsOfWinAsPercentage() {
-    double odds = (double)numberOfWinsRemaining / (double)cards.length;
+    double odds = (double) numberOfWins / (double)cards.length;
     double oddsAsPercentage = (odds * 100);
     double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);
     return oddsAsPercentageToTheHundredth + "%";
@@ -93,4 +93,9 @@ public class Deck {
   public int length() {
     return cards.length;
   }
+
+  public int getNumberOfWins() {
+    return numberOfWins;
+  }
+
 }

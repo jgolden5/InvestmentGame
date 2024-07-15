@@ -1,7 +1,7 @@
 package com.ple.investmentGame;
 
 public class InvestmentGameModelService {
-  public Deck deck;
+  private Deck deck;
   private int tokens;
 
   public static InvestmentGameModelService make() {

@@ -8,7 +8,7 @@ public class PromptService {
     return new PromptService();
   }
 
-  public void generateDeck() {
+  public void start() {
     System.out.println("Separate the following with spaces to generate deck:");
     System.out.println("Winning cards; Total cards; Growth factor");
     Scanner scanner = new Scanner(System.in);
@@ -22,7 +22,17 @@ public class PromptService {
     deck.putGrowthFactor(growthFactor);
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     igms.putDeck(deck);
-    //for test
+    System.out.println("Enter your number of starting tokens:");
+    int startingTokents = scanner.nextInt();
+    igms.putTokens(startingTokents);
+    confirmationMessage();
+  }
+
+  private void confirmationMessage() {
+    InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
+    Deck deck = igms.getDeck();
+    int numberOfWins = deck.getNumberOfWins();
+    System.out.println("Your deck has ");
   }
 
   public void invest() {
@@ -31,8 +41,8 @@ public class PromptService {
     int tokens = igsm.getTokens();
     boolean keepGoing = deck.length() > 0;
     while(keepGoing) {
-      System.out.println("Your total money is " + tokens + ". There are " + deck.getWins() +
-        " wins left out of the " + deck.getTotalCards() + " total cards. Your chances of winning are " +
+      System.out.println("Your total money is " + tokens + ". There are " + deck.getNumberOfWins() +
+        " wins left out of the " + deck.length() + " total cards. Your chances of winning are " +
         deck.getOddsOfWinAsPercentage() + ".");
       System.out.println("How much do you want to invest?");
       Scanner scanner = new Scanner(System.in);
