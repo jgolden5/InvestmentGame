@@ -67,6 +67,9 @@ public class PromptService {
       if(investment > tokens) {
         System.out.println("Your investment is greater than your number of tokens. Investing all " + tokens + " tokens.");
         investment = tokens;
+      } else if(investment <= 0) {
+        System.out.println("Invesmtment cannot be less than one. Investing 1");
+        investment = 1;
       }
       if(cardsRemaining > 0) {
         Card card = deck.drawCard();
