@@ -17,7 +17,7 @@ public class UserUtil {
 
   private void initializeKeymap() {
     keymap.put("exit", new ExitCommand());
-    keymap.put("generate", new GenerateCommand());
+    keymap.put("generateDeck", new GenerateDeckCommand());
     keymap.put("play", new PlayCommand());
 
   }

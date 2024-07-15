@@ -2,7 +2,7 @@ package com.ple.investmentGame;
 
 import java.util.Scanner;
 
-public class GenerateCommand extends Command {
+public class GenerateDeckCommand extends Command {
   @Override
   public void execute() {
     System.out.println("Enter total number of cards followed by the number of wins (separate with a space)");
