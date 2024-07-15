@@ -26,10 +26,10 @@ public class PromptService {
   }
 
   public void invest() {
-    boolean keepGoing = true;
     InvestmentGameModelService igsm = ServiceHolder.investmentGameModelService;
     Deck deck = igsm.getDeck();
     int tokens = igsm.getTokens();
+    boolean keepGoing = deck.length() > 0;
     while(keepGoing) {
       System.out.println("Your total money is " + tokens + ". There are " + deck.getWins() +
         " wins left out of the " + deck.getTotalCards() + " total cards. Your chances of winning are " +
@@ -37,10 +37,19 @@ public class PromptService {
       System.out.println("How much do you want to invest?");
       Scanner scanner = new Scanner(System.in);
       int investment = scanner.nextInt();
+      if(investment > tokens) {
+        System.out.println("Your investment is greater than your number of tokens. Investing all " + tokens + " tokens.");
+        investment = tokens;
+      }
       if(deck.length() > 0) {
         Card card = deck.drawCard();
         if(card.status == WinningStatus.win) {
-
+          int growthFactor = deck.getGrowthFactor();
+          System.out.println("Your investment of " + investment + " has multiplied by " + growthFactor);
+          tokens *= growthFactor;
+          igsm.putTokens(tokens);
+        } else {
+          tokens -= investment;
         }
       } else {
         System.out.println("Your total money is " + tokens + ". Congratulations!");
