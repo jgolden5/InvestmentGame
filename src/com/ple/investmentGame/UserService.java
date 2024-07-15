@@ -3,15 +3,15 @@ package com.ple.investmentGame;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class UserUtil {
+public class UserService {
 
   private final HashMap<String, Command> keymap = new HashMap<>();
 
-  public static UserUtil make() {
-    return new UserUtil();
+  public static UserService make() {
+    return new UserService();
   }
 
-  private UserUtil() {
+  private UserService() {
     initializeKeymap();
   }
 
