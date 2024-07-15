@@ -7,6 +7,7 @@ import static com.ple.investmentGame.WinningStatus.*;
 public class Deck {
   public Card[] cards;
   public int numberOfWinsRemaining;
+  private int growthFactor;
 
   private Deck(Card[] cards) {
     this.cards = cards;
@@ -77,6 +78,14 @@ public class Deck {
       newCards[i] = cards[i + 1];
     }
     cards = newCards;
+  }
+
+  public void putGrowthFactor(int growthFactor) {
+    this.growthFactor = growthFactor;
+  }
+
+  public int getGrowthFactor() {
+    return growthFactor;
   }
 
 }

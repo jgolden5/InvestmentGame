@@ -7,11 +7,10 @@ public class PromptService {
   }
 
   public void generateDeck() {
-
+    new GenerateDeckCommand().execute();
   }
 
   public void invest() {
-
   }
 
 }
