@@ -30,8 +30,8 @@ public class PromptService {
     igms.putDeck(deck);
     igms.putTokenGoal(tokenGoal);
     System.out.println("Enter your number of starting tokens:");
-    int startingTokents = scanner.nextInt();
-    igms.putTokens(startingTokents);
+    int startingTokens = scanner.nextInt();
+    igms.putTokens(startingTokens);
     confirmationMessage();
   }
 
@@ -95,7 +95,6 @@ public class PromptService {
             System.out.println("There were " + cardsRemaining + " cards remaining, " + winsRemaining + " of which were wins.");
             System.out.println("These were the cards left in the deck:");
             deck.printWinningStatusOfEachCard();
-            printEndMessage();
             keepGoing = false;
           }
           igsm.putTokens(tokens);
