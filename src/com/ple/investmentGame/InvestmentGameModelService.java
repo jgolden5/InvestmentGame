@@ -3,6 +3,7 @@ package com.ple.investmentGame;
 public class InvestmentGameModelService {
   private Deck deck;
   private int tokens;
+  private int tokenGoal;
 
   public static InvestmentGameModelService make() {
     return new InvestmentGameModelService();
@@ -20,8 +21,15 @@ public class InvestmentGameModelService {
     return tokens;
   }
 
+  public int getTokenGoal() {
+    return tokenGoal;
+  }
+
   public void putTokens(int tokens) {
     this.tokens = tokens;
   }
 
+  public void putTokenGoal(int tokenGoal) {
+    this.tokenGoal = tokenGoal;
+  }
 }

@@ -15,18 +15,20 @@ public class PromptService {
 
   public void start() {
     System.out.println("Separate the following with spaces to generate deck:");
-    System.out.println("Total cards; Winning cards; Growth factor");
+    System.out.println("Total cards; Winning cards; Growth factor; Token goal");
     Scanner scanner = new Scanner(System.in);
     String deckInputsAsStrings = scanner.nextLine();
     String[] deckInputsAsArrayOfStrings = deckInputsAsStrings.split(" ");
     int numberOfCards = Integer.parseInt(deckInputsAsArrayOfStrings[0]);
     int numberOfWins = Integer.parseInt(deckInputsAsArrayOfStrings[1]);
+    int growthFactor = Integer.parseInt(deckInputsAsArrayOfStrings[2]);
+    int tokenGoal = Integer.parseInt(deckInputsAsArrayOfStrings[3]);
     Deck deck = Deck.generate(numberOfCards, numberOfWins);
     deck.shuffle();
-    int growthFactor = Integer.parseInt(deckInputsAsArrayOfStrings[2]);
     deck.putGrowthFactor(growthFactor);
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     igms.putDeck(deck);
+    igms.putTokenGoal(tokenGoal);
     System.out.println("Enter your number of starting tokens:");
     int startingTokents = scanner.nextInt();
     igms.putTokens(startingTokents);
@@ -55,7 +57,7 @@ public class PromptService {
       if(cardsRemaining == winsRemaining || winsRemaining == 0) {
         int chancesOfWinning = winsRemaining == 0 ? 0 : 100;
         System.out.println("Chances of winning are " + chancesOfWinning + "%, so the game is over.");
-        System.out.println("Your total money is " + tokens + ". Congratulations!");
+        printEndMessage();
         break;
       }
       System.out.println("You currently have " + tokens + " tokens. There are " + deck.calcNumberOfWins() +
@@ -85,6 +87,7 @@ public class PromptService {
             System.out.println("There were " + cardsRemaining + " cards remaining, " + winsRemaining + " of which were wins.");
             System.out.println("These were the cards left in the deck:");
             deck.printWinningStatusOfEachCard();
+            printEndMessage();
             keepGoing = false;
           }
           igsm.putTokens(tokens);
@@ -101,22 +104,18 @@ public class PromptService {
     if(userWantsToPlayAgain.toLowerCase().equals("yes")) {
       play();
     }
-    //Your total money is 5 tokens. There are 2 wins left out of 4 total cards. Your chances of winning are 50%.
-    //How much do you want to invest?
-    //1
-    //Loss...
-    //Your total money is 4 tokens. There are 2 wins left out of 3 total cards. Your chances of winning are 66.67%.
-    //How much do you want to invest?
-    //3
-    //Win!
-      //Your investment of 3 has multiplied by 2!
-      //Your total money is 6 tokens. There is 1 win left out of 2 total cards. Your chances of winning are 50%.
-    //How much do you want to invest?
-    //4
-    //Win!
-      //Your investment of 6 has multiplied by 2!
-      //Your total money is 12 tokens. Congratulations!
+  }
 
+  private void printEndMessage() {
+    InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
+    int tokens = igms.getTokens();
+    int tokenGoal = igms.getTokenGoal();
+    System.out.println("Your total money is " + tokens + ". ");
+    if(tokens >= tokenGoal) {
+      System.out.println("Congratulations! You have exceeded your token goal of " + tokenGoal + " by " + (tokens - tokenGoal) + " tokens.");
+    } else {
+      System.out.println("Good try. You were only "  + (tokenGoal - tokens) + " tokens away from meeting your goal of " + tokenGoal + " tokens.");
+    }
   }
 
 }
