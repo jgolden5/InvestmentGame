@@ -82,7 +82,7 @@ public class PromptService {
           tokens -= investment;
           if(tokens <= 0) {
             System.out.println("Token total has reached 0. You have gone bankrupt...");
-            System.out.println("There were " + cardsRemaining + ", with " + winsRemaining + " wins remaining.");
+            System.out.println("There were " + cardsRemaining + " cards remaining, " + winsRemaining + " of which were wins.");
             keepGoing = false;
           }
           igsm.putTokens(tokens);
