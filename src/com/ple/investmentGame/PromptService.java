@@ -83,6 +83,8 @@ public class PromptService {
           if(tokens <= 0) {
             System.out.println("Token total has reached 0. You have gone bankrupt...");
             System.out.println("There were " + cardsRemaining + " cards remaining, " + winsRemaining + " of which were wins.");
+            System.out.println("These were the cards left in the deck:");
+            deck.printWinningStatusOfEachCard();
             keepGoing = false;
           }
           igsm.putTokens(tokens);
