@@ -11,7 +11,7 @@ public class Deck {
 
   private Deck(Card[] cards) {
     this.cards = cards;
-    this.numberOfWins = calcNumberOfWins();
+    this.numberOfWins = calcWinsRemaining();
   }
 
   public static Deck generate(int numberOfCards, int numberOfWins) {
@@ -26,7 +26,7 @@ public class Deck {
     return new Deck(generatedCards);
   }
 
-  public int calcNumberOfWins() {
+  public int calcWinsRemaining() {
     int numberOfWinsRemaining = 0;
     for(Card card : cards) {
       if(card.status == win) {
@@ -56,7 +56,7 @@ public class Deck {
   }
 
   public String getOddsOfWinAsPercentage() {
-    int numberOfWins = calcNumberOfWins();
+    int numberOfWins = calcWinsRemaining();
     double odds = (double) numberOfWins / (double)cards.length;
     double oddsAsPercentage = (odds * 100);
     double oddsAsPercentageToTheHundredth = 0.01 * Math.floor(oddsAsPercentage * 100);
