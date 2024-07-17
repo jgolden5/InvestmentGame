@@ -57,26 +57,25 @@ public class PromptService {
       int tokens = igms.getTokens();
       int tokenGoal = igms.getTokenGoal();
       int growthFactor = deck.getGrowthFactor();
+      boolean shouldBreak = chancesOfWinningOrLosingInevitable(cardsRemaining, winsRemaining);
+      if(shouldBreak) break;
       turnlyStatReport(tokens, tokenGoal, deck, growthFactor);
       int investment = userInvestmentPromptAndGetInvestment(tokens);
-      keepGoing = chancesOfWinningOrLosingInevitable(cardsRemaining, winsRemaining);
-      if(keepGoing) {
-        keepGoing = flipCardAndDetermineKeepGoing(deck, investment, tokens, growthFactor);
-      }
+      keepGoing = flipCardAndDetermineKeepGoing(deck, investment, tokens, growthFactor);
       igms.putDeck(deck);
     }
     playAgainPrompt();
   }
 
   private boolean chancesOfWinningOrLosingInevitable(int cardsRemaining, int winsRemaining) {
-    boolean keepGoing = true;
+    boolean shouldBreak = false;
     if(cardsRemaining == winsRemaining || winsRemaining == 0) {
       int chancesOfWinning = winsRemaining == 0 ? 0 : 100;
       System.out.println("Chances of winning are " + chancesOfWinning + "%, so the game is over.");
       printEndMessage();
-      keepGoing = false;
+      shouldBreak = true;
     }
-    return keepGoing;
+    return shouldBreak;
   }
 
   private boolean flipCardAndDetermineKeepGoing(Deck deck, int investment, int tokens, int growthFactor) {
@@ -103,7 +102,7 @@ public class PromptService {
   private void turnlyStatReport(int tokens, int tokenGoal, Deck deck, int growthFactor) {
     System.out.print("You currently have " + tokens + " tokens. ");
     if(tokens < tokenGoal) {
-      System.out.println("You need " + (tokenGoal - tokens) + " tokens to reach your token goal of " + tokenGoal + ". ");
+      System.out.println("You need " + (tokenGoal - tokens) + " more tokens to reach your token goal of " + tokenGoal + ". ");
     } else {
       System.out.println("You are ahead of your goal of " + tokenGoal + " tokens by " + (tokens - tokenGoal) + " tokens.");
     }
