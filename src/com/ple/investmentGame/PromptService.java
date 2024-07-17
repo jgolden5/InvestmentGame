@@ -44,12 +44,12 @@ public class PromptService {
     int tokens = igms.getTokens();
     System.out.println("Your deck has " + numberOfWins + " wins and " + numberOfCards + " total cards, " +
       "with a growth factor of " + growthFactor + ". You have " + tokens + " tokens to start with.");
+    System.out.println();
   }
 
   public void invest() {
     InvestmentGameModelService igsm = ServiceHolder.investmentGameModelService;
     Deck deck = igsm.getDeck();
-    int tokens = igsm.getTokens();
     boolean keepGoing = deck.length() > 0;
     while(keepGoing) {
       int cardsRemaining = deck.length();
@@ -60,10 +60,19 @@ public class PromptService {
         printEndMessage();
         break;
       }
-      System.out.println("You currently have " + tokens + " tokens. There are " + deck.calcNumberOfWins() +
+      int tokens = igsm.getTokens();
+      int tokenGoal = igsm.getTokenGoal();
+      int growthFactor = deck.getGrowthFactor();
+      System.out.print("You currently have " + tokens + " tokens. ");
+      if(tokens < tokenGoal) {
+        System.out.println("You need " + (tokenGoal - tokens) + " tokens to reach your token goal of " + tokenGoal + ". ");
+      } else {
+        System.out.println("You are ahead of your goal of " + tokenGoal + " tokens by " + (tokens - tokenGoal) + " tokens.");
+      }
+      System.out.println("There are " + deck.calcNumberOfWins() +
         " wins left out of the " + cardsRemaining + " total cards. Your chances of winning are " +
-        deck.getOddsOfWinAsPercentage() + ".");
-      System.out.println("How much do you want to invest?");
+        deck.getOddsOfWinAsPercentage() + ". ");
+      System.out.println("Growth factor is " + growthFactor + ". How much do you want to invest?");
       Scanner scanner = new Scanner(System.in);
       int investment = scanner.nextInt();
       if(investment > tokens) {
@@ -76,7 +85,6 @@ public class PromptService {
       if(cardsRemaining > 0) {
         Card card = deck.drawCard();
         if(card.status == WinningStatus.win) {
-          int growthFactor = deck.getGrowthFactor();
           System.out.println("Your investment of " + investment + " has multiplied by " + growthFactor);
           tokens += investment * growthFactor - investment;
           igsm.putTokens(tokens);
