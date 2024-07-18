@@ -24,7 +24,7 @@ public class PromptService {
     int growthFactor = Integer.parseInt(deckInputsAsArrayOfStrings[2]);
     int tokenGoal = Integer.parseInt(deckInputsAsArrayOfStrings[3]);
     Deck deck = Deck.generate(numberOfCards, numberOfWins);
-    deck.shuffle();
+    deck.superShuffle();
     deck.putGrowthFactor(growthFactor);
     InvestmentGameModelService igms = ServiceHolder.investmentGameModelService;
     igms.putDeck(deck);

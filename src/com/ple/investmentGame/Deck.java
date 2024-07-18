@@ -46,6 +46,14 @@ public class Deck {
     }
   }
 
+  public void superShuffle() {
+    int i = 0;
+    while(i < 500) {
+      shuffle();
+      i++;
+    }
+  }
+
   public void printWinningStatusOfEachCard() {
     int cardNumber = 1;
     for(Card card : cards) {
