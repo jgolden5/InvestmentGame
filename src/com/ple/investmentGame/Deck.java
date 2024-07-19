@@ -5,6 +5,7 @@ import java.util.Random;
 import static com.ple.investmentGame.WinningStatus.*;
 
 public class Deck {
+
   public Card[] cards;
   public int numberOfWins;
   private int growthFactor;
