@@ -7,11 +7,14 @@ startButton.addEventListener("click", () => gameStart(startingInvestmentInput.va
 
 let winningCardsRemaining, investmentRemaining, cardsRemaining, winChance;
 
+const deck = [];
+
 function gameStart(startingInvestmentInput, numberOfWinCardsInput, deckSizeInput) {
   if(startingInvestmentInput > 0 && numberOfWinCardsInput > 0 && deckSizeInput > 0) {
     investmentRemaining = startingInvestmentInput;
     winningCardsRemaining = numberOfWinCardsInput;
     cardsRemaining = deckSizeInput;
+    generateDeck(winningCardsRemaining, cardsRemaining);
     winChance = calcWinChanceAsPercentage(winningCardsRemaining, cardsRemaining);
     document.getElementById("heading").innerText = winChance + " chance of winning...";
     document.getElementById("investmentRemaining").innerText = "Investment Remaining = " + investmentRemaining;
@@ -26,6 +29,19 @@ function gameStart(startingInvestmentInput, numberOfWinCardsInput, deckSizeInput
       document.getElementById("errorMessage").innerText = ""
     }, 1000)
   }
+}
+
+function generateDeck(winningCardsRemaining, cardsRemaining) {
+  let i = 0;
+  while(i < winningCardsRemaining) {
+    deck.push(true); //true == winning card
+    i++;
+  }
+  while(i < cardsRemaining) {
+    deck.push(false); //false == losing card
+    i++
+  }
+  console.log(deck); //temp
 }
 
 function calcWinChanceAsPercentage(winningCardsRemaining, cardsRemaining) {
