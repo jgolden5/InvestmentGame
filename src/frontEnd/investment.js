@@ -39,9 +39,24 @@ function generateDeck(winningCardsRemaining, cardsRemaining) {
   }
   while(i < cardsRemaining) {
     deck.push(false); //false == losing card
-    i++
+    i++;
   }
+  shuffle(deck, 15);
   console.log(deck); //temp
+}
+
+function shuffle(unshuffledDeck, timesToShuffle) {
+  shuffledDeck = unshuffledDeck;
+  t = 0;
+  while(t < timesToShuffle) {
+    for(let i = 0; i < shuffledDeck.length; i++) {
+      const r = Math.floor(Math.random() * (i + 1));
+      let temp = shuffledDeck[i];
+      shuffledDeck[i] = shuffledDeck[r];
+      shuffledDeck[r] = temp;
+    }
+    t++;
+  }
 }
 
 function calcWinChanceAsPercentage(winningCardsRemaining, cardsRemaining) {
