@@ -2,27 +2,33 @@ const startingInvestmentInput = document.getElementById("startingInvestmentInput
 const numberOfWinCardsInput = document.getElementById("numberOfWinCardsInput");
 const deckSizeInput = document.getElementById("deckSizeInput");
 
+const card = document.getElementById("card");
+
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", () => gameStart(startingInvestmentInput.value, numberOfWinCardsInput.value, deckSizeInput.value));
 
-let winningCardsRemaining, investmentRemaining, cardsRemaining, winChance;
+card.addEventListener("click", function() {
+  if(window.getComputedStyle(card).backgroundColor == "rgb(255, 255, 0)") {
+    drawCard();
+  } else {
+    nextCard();
+  }
+});
 
-const deck = [];
+let deck = [];
+
+let winningCardsRemaining, investmentRemaining, winChance;
 
 function gameStart(startingInvestmentInput, numberOfWinCardsInput, deckSizeInput) {
   if(startingInvestmentInput > 0 && numberOfWinCardsInput > 0 && deckSizeInput > 0) {
     investmentRemaining = startingInvestmentInput;
     winningCardsRemaining = numberOfWinCardsInput;
-    cardsRemaining = deckSizeInput;
-    generateDeck(winningCardsRemaining, cardsRemaining);
-    winChance = calcWinChanceAsPercentage(winningCardsRemaining, cardsRemaining);
-    document.getElementById("heading").innerText = winChance + " chance of winning...";
-    document.getElementById("investmentRemaining").innerText = "Investment Remaining = " + investmentRemaining;
-    document.getElementById("winningCardsRemaining").innerText = "Winning Cards Remaining = " + winningCardsRemaining;
-    document.getElementById("cardsRemaining").innerText = "Cards Remaining = " + cardsRemaining;
+    deck = generateDeck(winningCardsRemaining, deckSizeInput);
+    displayGameStats()
     document.getElementById("startingInputs").style = "display: none";
-    document.getElementById("startButton").style = "display: none";
-    document.getElementById("card").style = "display: flex";
+    startButton.style = "display: none";
+    card.style = "display: flex";
+    card.innerText = "Flip Card";
   } else {
     document.getElementById("errorMessage").innerText = "Error: Please fill in each of the fields with a number greater than 0."
     setTimeout(() => {
@@ -31,18 +37,25 @@ function gameStart(startingInvestmentInput, numberOfWinCardsInput, deckSizeInput
   }
 }
 
-function generateDeck(winningCardsRemaining, cardsRemaining) {
+function displayGameStats() {
+  winChance = calcWinChanceAsPercentage(winningCardsRemaining);
+  document.getElementById("heading").innerText = winChance + " chance of winning...";
+  document.getElementById("investmentRemaining").innerText = "Investment Remaining = " + investmentRemaining;
+  document.getElementById("winningCardsRemaining").innerText = "Winning Cards Remaining = " + winningCardsRemaining;
+  document.getElementById("cardsRemaining").innerText = "Cards Remaining = " + deck.length;
+}
+
+function generateDeck(winningCardsRemaining, deckSize) {
   let i = 0;
   while(i < winningCardsRemaining) {
     deck.push(true); //true == winning card
     i++;
   }
-  while(i < cardsRemaining) {
+  while(i < deckSize) {
     deck.push(false); //false == losing card
     i++;
   }
-  shuffle(deck, 15);
-  console.log(deck); //temp
+  return shuffle(deck, 15);
 }
 
 function shuffle(unshuffledDeck, timesToShuffle) {
@@ -57,8 +70,28 @@ function shuffle(unshuffledDeck, timesToShuffle) {
     }
     t++;
   }
+  return shuffledDeck;
 }
 
-function calcWinChanceAsPercentage(winningCardsRemaining, cardsRemaining) {
-  return Math.round(winningCardsRemaining / cardsRemaining * 100 * 100) / 100 + '%';
+function calcWinChanceAsPercentage(winningCardsRemaining) {
+  return Math.round(winningCardsRemaining / deck.length * 100 * 100) / 100 + '%';
+}
+
+function drawCard() {
+  const cardIsAWin = deck[0];
+  if(cardIsAWin) {
+    card.style = "background-color:green";
+    card.innerText = "Win!";
+    winningCardsRemaining--;
+  } else {
+    card.style = "background-color:red";
+    card.innerText = "Loss...";
+  }
+  deck.shift();
+  displayGameStats();
+}
+
+function nextCard() {
+  card.style.backgroundColor = "yellow";
+  card.innerText = "Flip Card"
 }
