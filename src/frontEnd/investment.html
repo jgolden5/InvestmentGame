@@ -8,8 +8,17 @@
 <body>
 
 <h1>Welcome to the Investment Game!</h1>
-<button id="startGame" type="button" class="mainButton">Start Game</button>
-<p id="hiddenP" style="display:none;">This was hidden but now is shown</p>
+<div id="startingInputs">
+  <input type="text" id="startingInvestmentInput" placeholder="Initial investment">
+  <input type="text" id="increasePerWinInput" placeholder="% increase per win">
+  <input type="text" id="deckSizeInput" placeholder="# of cards">
+</div>
+<button id="startButton" type="button" class="mainButton">Start Game</button>
+<div id="gameStats">
+  <p id="investmentRemaining"></p>
+  <p id="cardsRemaining"></p>
+</div>
+<b id="errorMessage"></b>
 <script src="investment.js"></script>
 
 </body>

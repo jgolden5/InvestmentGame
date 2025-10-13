@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+#startingInputs {
+  text-align: center;
+  padding: 20px;
+}
+
 .mainButton {
   font-size: 24px;
   align-items: center;
@@ -17,4 +22,14 @@
 
 .mainButton:hover {
   background-color: green;
+}
+
+#gameStats {
+  padding: 20px;
+}
+
+#errorMessage {
+  padding: 20px;
+  font-size: 24px;
+  color: red;
 }
