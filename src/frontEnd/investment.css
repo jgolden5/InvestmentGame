@@ -22,6 +22,24 @@
 
 .mainButton:hover {
   background-color: green;
+  cursor: pointer;
+}
+
+#card {
+  width: 425px;
+  height: 600px;
+  font-size: 48px;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+  border-radius: 12px;
+  margin-top: 20px;
+  margin: 20px auto 0 auto;
+  display: none;
+}
+
+#card:hover {
+  cursor: pointer;
 }
 
 #gameStats {

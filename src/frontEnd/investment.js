@@ -12,13 +12,15 @@ function gameStart(startingInvestmentInput, increasePerWinInput, deckSizeInput) 
     investmentRemaining = startingInvestmentInput;
     percentIncreasePerWin = increasePerWinInput;
     cardsRemaining = deckSizeInput;
-    document.getElementById("investmentRemaining").innerHTML = "Investment Remaining = " + investmentRemaining;
-    document.getElementById("cardsRemaining").innerHTML = "Cards Remaining = " + cardsRemaining;
+    document.getElementById("investmentRemaining").innerText = "Investment Remaining = " + investmentRemaining;
+    document.getElementById("cardsRemaining").innerText = "Cards Remaining = " + cardsRemaining;
     document.getElementById("startingInputs").style = "display: none";
+    document.getElementById("startButton").style = "display: none";
+    document.getElementById("card").style = "display: flex";
   } else {
-    document.getElementById("errorMessage").innerHTML = "Error: Please fill in each of the fields with a number greater than 0."
+    document.getElementById("errorMessage").innerText = "Error: Please fill in each of the fields with a number greater than 0."
     setTimeout(() => {
-      document.getElementById("errorMessage").innerHTML = ""
+      document.getElementById("errorMessage").innerText = ""
       location.reload();
     }, 1000)
   }
