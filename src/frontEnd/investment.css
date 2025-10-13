@@ -4,6 +4,10 @@
   text-align: center;
 }
 
+#heading {
+  padding-top: 20px;
+}
+
 #startingInputs {
   text-align: center;
   padding: 20px;

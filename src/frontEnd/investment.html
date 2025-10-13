@@ -7,16 +7,17 @@
 </head>
 <body>
 
-<h1>Welcome to the Investment Game!</h1>
+<h1 id="heading">Welcome to the Investment Game!</h1>
 <div id="startingInputs">
   <input type="text" id="startingInvestmentInput" placeholder="Initial investment">
-  <input type="text" id="increasePerWinInput" placeholder="% increase per win">
-  <input type="text" id="deckSizeInput" placeholder="# of cards">
+  <input type="text" id="numberOfWinCardsInput" placeholder="# of winning cards">
+  <input type="text" id="deckSizeInput" placeholder="Total # of cards">
 </div>
 <button id="startButton" type="button" class="mainButton">Start Game</button>
 <div id="card">Flip Card</div>
 <div id="gameStats">
   <p id="investmentRemaining"></p>
+  <p id="winningCardsRemaining"></p>
   <p id="cardsRemaining"></p>
 </div>
 <b id="errorMessage"></b>
